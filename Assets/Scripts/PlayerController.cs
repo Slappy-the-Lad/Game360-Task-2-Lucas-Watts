@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         input = Vector2.zero;
         Keyboard kb = Keyboard.current;
+        Mouse mouse = Mouse.current;
 
         //This code is for player movement
 
@@ -42,6 +43,10 @@ public class PlayerController : MonoBehaviour
             input.y = +1;
         }
 
+        if (mouse.rightButton.isPressed)
+        {
+            
+        }
     }
 
     private void FixedUpdate() => rb.linearVelocity = input * speed;
