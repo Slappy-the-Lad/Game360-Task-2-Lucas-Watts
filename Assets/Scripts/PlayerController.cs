@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
         input = Vector2.zero;
         Keyboard kb = Keyboard.current;
 
+        //This code is for player movement
+
         if ((kb.aKey.isPressed) || (kb.leftArrowKey.isPressed))
         {
             input.x = -1;
