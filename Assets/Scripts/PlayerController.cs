@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private float speed = 6.0f;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject playerBullet;
     [SerializeField] private Transform firePoint;
-
+    
     private Rigidbody2D rb; //reference to player rigidbody
     private Vector2 input; //reference to keyboard
 
@@ -43,9 +44,13 @@ public class PlayerController : MonoBehaviour
             input.y = +1;
         }
 
-        if (mouse.rightButton.isPressed)
+        if (Input.GetMouseButtonDown(0))//done this way so it only activates once instead of every frame.
         {
-            
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //gets the mouse position
+            Vector2 shootAngle = mousePos - firePoint.transform.position; //compares position of mouse and player to get an angle
+            float angle = Mathf.Atan2(shootAngle.y,shootAngle.x) * Mathf.Rad2Deg; //wizardry
+            firePoint.transform.rotation = quaternion.Euler(0,0,angle); //faces the angle in the right direction
+            Instantiate(playerBullet, firePoint.transform.position, quaternion.identity);//spawns bullet
         }
     }
 

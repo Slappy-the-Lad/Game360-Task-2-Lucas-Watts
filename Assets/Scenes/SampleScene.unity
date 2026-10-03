@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 6
-  bulletPrefab: {fileID: 4632712417750729687, guid: 5dc6c8252bc76844d9a24f4b6eaa1351, type: 3}
+  playerBullet: {fileID: 4632712417750729687, guid: 5dc6c8252bc76844d9a24f4b6eaa1351, type: 3}
   firePoint: {fileID: 46237673}
 --- !u!1 &1766875835
 GameObject:
@@ -864,8 +864,8 @@ Transform:
   m_GameObject: {fileID: 1766875835}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1491997, y: -6.4476, z: -9719.999}
-  m_LocalScale: {x: 1919.4767, y: 1084.7405, z: 108}
+  m_LocalPosition: {x: -3.32, y: -2.9, z: -500}
+  m_LocalScale: {x: 1996.4362, y: 1184.9877, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1245036190}
