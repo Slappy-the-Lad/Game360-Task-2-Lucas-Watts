@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,9 +49,11 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //gets the mouse position
             Vector2 shootAngle = mousePos - firePoint.transform.position; //compares position of mouse and player to get an angle
+            shootAngle.Normalize(); //makes it so distance of mouse and player doesn't affect bullet speed
             float angle = Mathf.Atan2(shootAngle.y,shootAngle.x) * Mathf.Rad2Deg; //wizardry
             firePoint.transform.rotation = quaternion.Euler(0,0,angle); //faces the angle in the right direction
-            Instantiate(playerBullet, firePoint.transform.position, quaternion.identity);//spawns bullet
+            GameObject bullet = Instantiate(playerBullet, firePoint.transform.position, quaternion.identity);//spawns bullet
+            bullet.GetComponent<BulletScript>().input = shootAngle; //fires the bullet using the bullet script
         }
     }
 

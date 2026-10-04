@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8137572341025771356}
   - component: {fileID: -2396771449429897830}
   - component: {fileID: 722839001181223696}
+  - component: {fileID: -506725315396336202}
   m_Layer: 0
   m_Name: Player Bullet
   m_TagString: Untagged
@@ -156,3 +157,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-506725315396336202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632712417750729687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d891b9fcefdab43b605333fc3493ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletScript
+  speed: 30
+  input: {x: 0, y: 0}
