@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -21,6 +22,18 @@ public class BulletScript : MonoBehaviour
     }
     private void FixedUpdate() => rb.linearVelocity = input * speed; //speed for bullet
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Enemy") //enemy and wall collision scripts are seperated for observer class
+        {
+            Destroy(this.gameObject); //destorys bullet on enemy collision.
+        }
+
+        if(other.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject); //destorys bullet on wall collision.
+        }
+    }
     public IEnumerator DestroyBullet()
     {
         yield return new WaitForSeconds(3); // destroys bullet after 3 seconds
