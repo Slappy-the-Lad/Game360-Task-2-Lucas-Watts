@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer sr;
     private void OnEnable()=> BulletScript.OnEnemyHit += React;
     private void OnDisable()=> BulletScript.OnEnemyHit -= React;
-   private void React()
+   private void React(int value)
     {
         StopAllCoroutines();
         StartCoroutine(Flash());

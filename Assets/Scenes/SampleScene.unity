@@ -454,8 +454,9 @@ GameObject:
   - component: {fileID: 203315617}
   - component: {fileID: 203315619}
   - component: {fileID: 203315618}
+  - component: {fileID: 203315620}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: scoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,6 +581,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203315616}
   m_CullTransparentMesh: 1
+--- !u!114 &203315620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203315616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d152e2dc024e34ba6975cad27689e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreUI
+  scoretext: {fileID: 203315618}
+  highscore: {fileID: 1570811505}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +932,7 @@ GameObject:
   - component: {fileID: 1570811506}
   - component: {fileID: 1570811505}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: highScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1028,7 +1043,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -108.84164, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1235,6 +1250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766875836}
   - component: {fileID: 1766875837}
+  - component: {fileID: 1766875838}
   m_Layer: 0
   m_Name: Background
   m_TagString: Background
@@ -1316,6 +1332,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1766875838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766875835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c519577803f99f4c8a6cc3bab2e171c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
 --- !u!1 &2045372662
 GameObject:
   m_ObjectHideFlags: 0

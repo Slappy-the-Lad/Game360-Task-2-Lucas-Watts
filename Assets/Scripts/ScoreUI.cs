@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreUI : MonoBehaviour
 {
  
     public TMP_Text scoretext;
+    public TMP_Text highscore;
     private void OnEnable()
     {
         ScoreManager.OnScoreChanged += UpdateScore;
@@ -28,7 +30,9 @@ public class ScoreUI : MonoBehaviour
 
     }
 
-    void UpdateScore(int s) =>
+    void UpdateScore(int s, int hs)
+    {
         scoretext.text = "Score: " + s;
-
+        highscore.text = "High Score: " + hs;
+    }
 }

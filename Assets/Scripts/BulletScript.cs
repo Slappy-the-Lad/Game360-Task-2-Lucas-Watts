@@ -8,7 +8,7 @@ using UnityEngine.U2D;
 
 public class BulletScript : MonoBehaviour
 {
-    public static event Action OnEnemyHit;
+    public static event Action <int> OnEnemyHit;
     private int value = 10;
     [SerializeField] private float speed = 30.0f; //speed gets adjusted in unity editor
     public Vector2 input; 
@@ -31,7 +31,7 @@ public class BulletScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy") //enemy and wall collision scripts are seperated for observer class
         {
-            OnEnemyHit.Invoke();
+            OnEnemyHit.Invoke(value);
             other.gameObject.GetComponent<EnemyScript>().health--;
             if(other.gameObject.GetComponent<EnemyScript>().health == 0)
             {

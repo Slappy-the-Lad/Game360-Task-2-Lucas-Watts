@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static event Action<int> OnScoreChanged;
+    public static event Action<int, int> OnScoreChanged;
     private int score;
+    private int highscore;
 
-    private void OnEnable() => CoinScript.OnCoinCollected += AddScore;
-    private void OnDisable() => CoinScript.OnCoinCollected -= AddScore;
+    private void OnEnable() => BulletScript.OnEnemyHit += AddScore;
+    private void OnDisable() => BulletScript.OnEnemyHit -= AddScore;
 
-    private void AddScore(int amount)
+    private void AddScore(int value)
     {
-        score += amount;
-        OnScoreChanged?.Invoke(score); 
+        score += value;
+        if (score>highscore)
+        {
+            highscore = score;
+        }
+        OnScoreChanged?.Invoke(score, highscore);
     }
 
 
