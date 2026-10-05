@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using System.Security.Cryptography;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -29,13 +28,15 @@ public class EnemyScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if(player != null) 
+         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
        private IEnumerator Flash()
         {
         this.sr.color = Color.skyBlue;
         yield return new WaitForSeconds(0.3f);
-        this.sr.color = Color.white;
+        this.sr.color = Color.red;
         }
 }

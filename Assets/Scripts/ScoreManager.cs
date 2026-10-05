@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Build.Player;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -26,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        highscore = PlayerPrefs.GetInt("HighScore");
     }
 
     // Update is called once per frame

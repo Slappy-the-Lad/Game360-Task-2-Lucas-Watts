@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class ScoreUI : MonoBehaviour
 {
@@ -37,5 +37,9 @@ public class ScoreUI : MonoBehaviour
     {
         scoretext.text = "Score: " + s;
         highscore.text = "High Score: " + hs;
+    }
+       public void RestartButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }

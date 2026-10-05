@@ -1,10 +1,6 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Processors;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 6.0f;
     [SerializeField] private GameObject playerBullet;
     [SerializeField] private Transform firePoint;
-    private int HP = 10;
+    private int HP = 1;
     public GameObject GameOverScreen;
     private Rigidbody2D rb; //reference to player rigidbody
     private Vector2 input; //reference to keyboard
@@ -69,13 +65,11 @@ public class PlayerController : MonoBehaviour
             if (HP == 0)
             {
                 GameOverScreen.SetActive(true);
+                Destroy(this.gameObject);
             }
         }
     }
-    public void RestartButton()
-    {
-        SceneManager.LoadScene(0);
-    }
+ 
 
     private void FixedUpdate() => rb.linearVelocity = input * speed;
 }
