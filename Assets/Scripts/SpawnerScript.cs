@@ -19,6 +19,6 @@ public class SpawnerScript : MonoBehaviour
 
     private void spawnEnemy()
     {
-        Instantiate(enemyPrefab, transform.position, transform.rotation);
+        Instantiate(enemyPrefab, transform.position, transform.rotation); 
     }
 }
