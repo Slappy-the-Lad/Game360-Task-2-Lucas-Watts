@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 public class EnemyScript : MonoBehaviour
 {
     private SpriteRenderer sr;
-    private void Awake()=> sr = GetComponent<SpriteRenderer>();
     private void OnEnable()=> BulletScript.OnEnemyHit += React;
     private void OnDisable()=> BulletScript.OnEnemyHit -= React;
    private void React()
@@ -18,6 +17,11 @@ public class EnemyScript : MonoBehaviour
     public GameObject player;
     public int health = 4;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        player = GameObject.FindAnyObjectByType <PlayerController>().gameObject;
+    } 
     void Start()
     {
         
@@ -30,8 +34,8 @@ public class EnemyScript : MonoBehaviour
     }
        private IEnumerator Flash()
         {
-        sr.color = Color.skyBlue;
+        this.sr.color = Color.skyBlue;
         yield return new WaitForSeconds(0.3f);
-        sr.color = Color.white;
+        this.sr.color = Color.white;
         }
 }
