@@ -27,6 +27,7 @@ public class ScoreUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.Enter(GameState.Playing);
         savescore = PlayerPrefs.GetInt("HighScore");
         scoretext.text = "Score: 0";

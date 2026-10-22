@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpotlightScript : MonoBehaviour
@@ -7,6 +8,7 @@ public class SpotlightScript : MonoBehaviour
     private float resetTimer = 1;
     private bool playerSpotted = false;
     public static event Action OnPlayerDetect;
+    public List<EnemyScript> enemyScript = new List<EnemyScript>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,8 +33,15 @@ public class SpotlightScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //enemyScript.Add(GameObject.FindGameObjectsWithTag("Enemy").GetComponent<EnemyScript>());
         if(collision.CompareTag("Player"))
         {
+            //enemyScript = GetComponents<EnemyScript>();
+            foreach (EnemyScript enemy in enemyScript)
+            {
+                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
+
+            }
             playerSpotted = true;
         }
     }
@@ -40,6 +49,16 @@ public class SpotlightScript : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            foreach (EnemyScript enemy in enemyScript)
+            {
+                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
+
+            }
+            foreach (EnemyScript enemy in enemyScript)
+            {
+                enemy.GetComponent<EnemyScript>().inSpotlight = false;
+
+            }
             playerSpotted = false;
         }
     }
@@ -47,7 +66,18 @@ public class SpotlightScript : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-        OnPlayerDetect.Invoke();
+            //PUT THE ADD EVERYTHING TO THE LIST HERE ASWELL AHHHHHH!!!!!!!!
+            foreach (EnemyScript enemy in enemyScript)
+            {
+                enemy.GetComponent<EnemyScript>().inSpotlight = true;
+
+            }
+            foreach (EnemyScript enemy in enemyScript)
+            {
+                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
+
+            }
+            OnPlayerDetect.Invoke();
          timer = 5;
         resetTimer = 1;   
         }

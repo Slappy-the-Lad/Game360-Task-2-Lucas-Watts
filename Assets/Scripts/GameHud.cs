@@ -6,14 +6,11 @@ public class GameHUD : MonoBehaviour
 {
     [SerializeField] private TMP_Text livesText;
     [SerializeField] private GameObject pausePanel;
-    [SerializeField] private GameObject gameOverPanel;
     private void Awake()
     {
         if (livesText == null) Debug.LogWarning(name + ": GameHUD has no Lives Text assigned.", this);
     if (pausePanel == null) Debug.LogWarning(name + ": GameHUD has no Pause Panel assigned.", this);
-    if (gameOverPanel == null) Debug.LogWarning(name + ": GameHUD has no Game Over Panel assigned.", this);
     if (pausePanel != null) pausePanel.SetActive(false);
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
         //ShowLives(GameManager.Instance.Lives);
     }
     private void OnEnable()
@@ -38,8 +35,6 @@ public class GameHUD : MonoBehaviour
     private void ShowPanels(GameState state)
     {
         if (pausePanel != null) pausePanel.SetActive(state == GameState.Paused);
-        if (gameOverPanel != null) gameOverPanel.SetActive(state ==
-        GameState.GameOver);
     }
     // ---- buttons ----
     public void OnResumeButton()

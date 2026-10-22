@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 public static event Action <GameState> OnGameStateChanged;
     public static event Action<int> OnLivesChanged;
     [SerializeField] private int maxLives = 3;
-    public GameState State { get; private set; } = GameState.Playing;
+    public GameState State = GameState.Playing;
     public int Lives;
     public void Awake()
     {
@@ -43,13 +43,14 @@ public static event Action <GameState> OnGameStateChanged;
         //if (kb != null && kb.escapeKey.wasPressedThisFrame) TogglePause();'
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            print("Ben");
             TogglePause();
         }
     }
     public void Enter(GameState next)
     {
         State = next;
-        print("Im in " + next);
+        
         switch (next)
         {
             case GameState.Playing: Time.timeScale = 1f; break;
@@ -57,6 +58,7 @@ public static event Action <GameState> OnGameStateChanged;
             case GameState.GameOver: Time.timeScale = 0f;  break;
         }
         OnGameStateChanged?.Invoke(next);
+        print("I'm in " + next);
     }
     //public void SetState(GameState next)
     //{
@@ -67,6 +69,7 @@ public static event Action <GameState> OnGameStateChanged;
     //}
     public void TogglePause()
     {
+        
         if (State == GameState.Playing) Enter(GameState.Paused);
         else if (State == GameState.Paused) Enter(GameState.Playing);
     }
@@ -77,7 +80,7 @@ public static event Action <GameState> OnGameStateChanged;
         Lives--;
         if (Lives < 0) Lives = 0;
         OnLivesChanged?.Invoke(Lives);
-        if (Lives == 0) Enter(GameState.GameOver);
+        //if (Lives == 0) Enter(GameState.GameOver);
     }
 
     // ---- buttons ----

@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdda0b276c94b5746bf2a7ccf5f50708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpotlightScript
+  enemyScript: []
 --- !u!1 &203315616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,7 +1315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameHUD
   livesText: {fileID: 753203882}
   pausePanel: {fileID: 1417583862}
-  gameOverPanel: {fileID: 1139087648}
 --- !u!1 &771558184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdda0b276c94b5746bf2a7ccf5f50708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpotlightScript
+  enemyScript: []
 --- !u!58 &860067648
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3284,6 +3285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   maxLives: 3
+  State: 0
   Lives: 0
 --- !u!4 &1852605464
 Transform:
