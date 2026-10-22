@@ -1,13 +1,18 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.GraphView;
+using JetBrains.Annotations;
 
 public class ScoreUI : MonoBehaviour
 {
  
     public TMP_Text scoretext;
     public TMP_Text highscore;
+    public TMP_Text livestext;
     private int savescore;
+    public GameManager gameManager;
+
     private void OnEnable()
     {
         ScoreManager.OnScoreChanged += UpdateScore;
@@ -22,6 +27,7 @@ public class ScoreUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager.Enter(GameState.Playing);
         savescore = PlayerPrefs.GetInt("HighScore");
         scoretext.text = "Score: 0";
         highscore.text = "High Score: " + savescore;
@@ -37,9 +43,12 @@ public class ScoreUI : MonoBehaviour
     {
         scoretext.text = "Score: " + s;
         highscore.text = "High Score: " + hs;
+
     }
        public void RestartButton()
     {
+        print("Heloo");
+        //gameManager.Enter(GameState.Playing);
         SceneManager.LoadScene(0);
     }
 }

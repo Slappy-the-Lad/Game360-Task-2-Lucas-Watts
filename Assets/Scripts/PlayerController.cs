@@ -8,15 +8,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 6.0f;
     [SerializeField] private GameObject playerBullet;
     [SerializeField] private Transform firePoint;
-    private int HP = 1;
-    public GameObject GameOverScreen;
+    public int HP = 3;
+    public GameObject GameOverScreen, actualGameOVer;
     private Rigidbody2D rb; //reference to player rigidbody
     private Vector2 input; //reference to keyboard
+    public GameManager gameManager;
 
     private void Awake() => rb = GetComponent<Rigidbody2D>();
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        PlayerPrefs.GetInt("Lives", gameManager.Lives);
     }
 
     // Update is called once per frame
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
             input.y = +1;
         }
 
-        if (Input.GetMouseButtonDown(0))//done this way so it only activates once instead of every frame.
+        if (mouse.leftButton.wasPressedThisFrame)//done this way so it only activates once instead of every frame.
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //gets the mouse position
             Vector2 shootAngle = mousePos - firePoint.transform.position; //compares position of mouse and player to get an angle
@@ -64,8 +66,23 @@ public class PlayerController : MonoBehaviour
             HP --;
             if (HP == 0)
             {
-                GameOverScreen.SetActive(true);
+                
+                gameManager.Lives -= 1;
+                PlayerPrefs.SetInt("Lives", gameManager.Lives);
+                if (gameManager.Lives != 0)
+                {
+                    GameOverScreen.SetActive(true);
+                    
+                }
+                else
+                {
+                    actualGameOVer.SetActive(true);
+                    gameManager.Lives = 3;
+
+                }
+                    
                 Destroy(this.gameObject);
+                gameManager.Enter(GameState.GameOver);
             }
         }
     }
