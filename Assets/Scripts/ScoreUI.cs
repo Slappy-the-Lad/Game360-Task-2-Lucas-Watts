@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
-using JetBrains.Annotations;
 
 public class ScoreUI : MonoBehaviour
 {

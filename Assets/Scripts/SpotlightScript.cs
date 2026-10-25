@@ -8,6 +8,8 @@ public class SpotlightScript : MonoBehaviour
     private float resetTimer = 1;
     private bool playerSpotted = false;
     public static event Action OnPlayerDetect;
+    public static event Action OnPlayerLeave;
+    public static event Action OnPlayerStay;
     public List<EnemyScript> enemyScript = new List<EnemyScript>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,11 +39,7 @@ public class SpotlightScript : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             //enemyScript = GetComponents<EnemyScript>();
-            foreach (EnemyScript enemy in enemyScript)
-            {
-                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
-
-            }
+            OnPlayerStay.Invoke();
             playerSpotted = true;
         }
     }
@@ -49,16 +47,7 @@ public class SpotlightScript : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            foreach (EnemyScript enemy in enemyScript)
-            {
-                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
-
-            }
-            foreach (EnemyScript enemy in enemyScript)
-            {
-                enemy.GetComponent<EnemyScript>().inSpotlight = false;
-
-            }
+            OnPlayerLeave.Invoke();
             playerSpotted = false;
         }
     }
@@ -66,17 +55,7 @@ public class SpotlightScript : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            //PUT THE ADD EVERYTHING TO THE LIST HERE ASWELL AHHHHHH!!!!!!!!
-            foreach (EnemyScript enemy in enemyScript)
-            {
-                enemy.GetComponent<EnemyScript>().inSpotlight = true;
-
-            }
-            foreach (EnemyScript enemy in enemyScript)
-            {
-                enemy.GetComponent<EnemyScript>().Enter(EnemyState.Spotted);
-
-            }
+         
             OnPlayerDetect.Invoke();
          timer = 5;
         resetTimer = 1;   

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+   
     public EnemyState State = EnemyState.Idle;
     public static event Action <EnemyState> OnEnemyStateChanged;
     private CircleCollider2D circleCollider;
     private SpriteRenderer sr;
     public bool inRange, inSpotlight;
-    private void OnEnable()=> BulletScript.OnEnemyHit += React;
-    private void OnDisable()=> BulletScript.OnEnemyHit -= React;
+
    private void React(int value)
     {
         StopAllCoroutines();
@@ -26,16 +26,26 @@ public class EnemyScript : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         player = GameObject.FindAnyObjectByType <PlayerController>().gameObject;
     } 
-    void Start()
+    void OnEnable()
     {
+        SpotlightScript.OnPlayerStay += playerSpotted;
+       
+        SpotlightScript.OnPlayerLeave += playerLeave;
         
+        BulletScript.OnEnemyHit += React;
+
     }
 
     // Update is called once per frame
-    void Update()
+    void OnDisable()
     
     {
         
+        SpotlightScript.OnPlayerStay -= playerSpotted;
+       
+        SpotlightScript.OnPlayerLeave -= playerLeave;
+        
+        BulletScript.OnEnemyHit -= React;
 
     }
        private IEnumerator Flash()
@@ -46,13 +56,27 @@ public class EnemyScript : MonoBehaviour
         }
     public void Enter(EnemyState change)
     {
-        State = change;
-
-        if (inRange == true && inSpotlight == false)
+        if (change == EnemyState.Idle)
+        {
+            State = change;
+        }
+        if (change == EnemyState.Approach && inSpotlight == false)
+        {
+            State = change;
+        }
+        if (inSpotlight)
+        {
+            State = EnemyState.Spotted;
+        }
+       
+    }
+    void Update()
+    {
+        if (State == EnemyState.Approach)
         {
             Approach();
         }
-        else if(inRange == true && inSpotlight == true)
+        else if(State == EnemyState.Spotted)
         {
             Spotted();
         }
@@ -60,9 +84,7 @@ public class EnemyScript : MonoBehaviour
         {
             Idle();
         }
-
     }
-    
     private void Idle()
     {
        
@@ -71,6 +93,10 @@ public class EnemyScript : MonoBehaviour
     {
         if (player != null)
         {
+            if (inSpotlight)
+            {
+                State = EnemyState.Spotted;
+            }
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
@@ -78,7 +104,22 @@ public class EnemyScript : MonoBehaviour
     {
         if (player != null)
         {
+            if (!inSpotlight)
+            {
+                State = EnemyState.Approach;
+            }
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (speed * 1.5f) * Time.deltaTime);
         }
+    }
+    public void playerSpotted()
+    {
+        Enter(EnemyState.Spotted);
+        inSpotlight = true;
+    }
+    public void playerLeave()
+    {
+        
+        inSpotlight = false;
+        Enter(EnemyState.Idle);
     }
 }
